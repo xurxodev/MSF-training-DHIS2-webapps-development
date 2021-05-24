@@ -27,6 +27,11 @@ const LandingPage: React.FC = () => {
                     addAction: () => history.push("/for"),
                     listAction: () => history.push("/for/Mary"),
                 },
+                {
+                    name: "Training",
+                    description: "Training exercise",
+                    listAction: () => history.push("/training"),
+                },
             ],
         },
         {

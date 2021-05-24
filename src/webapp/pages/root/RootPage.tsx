@@ -2,6 +2,7 @@ import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import Example from "../example/Example";
 import LandingPage from "../landing/LandingPage";
+import TrainingPage from "../training/TrainingPage";
 
 const Root = () => {
     return (
@@ -12,6 +13,8 @@ const Root = () => {
                     render={({ match }) => <Example name={match.params.name} />}
                 />
                 <Route path="/for" render={() => <Example name="Stranger" />} />
+
+                <Route path="/training" render={() => <TrainingPage />} />
 
                 {/* Default route */}
                 <Route render={() => <LandingPage />} />
