@@ -19,7 +19,7 @@ const TrainingPage: React.FC = () => {
             </div>
 
             <div id="right-panel">
-                <h1>{i18n.t("Training!!")}</h1>
+                <h1>{i18n.t("Training session 2")}</h1>
 
                 {selectedOrgUnit && <OrgUnitDetail orgUnitId={selectedOrgUnit} />}
             </div>
