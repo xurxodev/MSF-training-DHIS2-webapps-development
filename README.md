@@ -11,8 +11,8 @@
 ## Branches
 
 -   Master contains full solution by EyeSeeTea (we recommended dont' see until the end)
--   session_1 is the branch for session 1 exercise
--   session_2 is the branch for session 1 exercise
+-   [session_1](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_1) is the branch for session 1 exercise
+-   [session_2](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_2) is the branch for session 1 exercise
 -   session_3 is the branch for session 1 exercise
 -   session_4 is the branch for session 1 exercise
 
