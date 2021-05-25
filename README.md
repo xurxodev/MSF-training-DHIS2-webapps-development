@@ -30,3 +30,9 @@
  - The data origin will change in the future sessions to consume a remote API.
  - In this sessión we are not going to use Material-UI, use standard html tags ul, li, div, span what you want
  - The created components will change in the future sessions to use Material-UI and Eyeseetea libraries
+
+## Screenshots
+
+<img width="1440" alt="training_session1_1" src="https://user-images.githubusercontent.com/5593590/119477917-ac8e3900-bd4f-11eb-8374-c75036d1bc7f.png">
+<img width="1440" alt="training_session1_2" src="https://user-images.githubusercontent.com/5593590/119477944-b2841a00-bd4f-11eb-8c74-05259cc50f48.png">
+
