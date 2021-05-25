@@ -95,7 +95,7 @@ $ yarn localize
 
 ### App context
 
-The file `src/contexts/app-context.ts` holds some general context so typical infrastructure objects (`api`, `d2`, ...) are readily available. Add your own global objects if necessary.
+The file `src/contexts/app-context.ts` holds some general context so typical infrastructure objects (`compositionRoot`, ...) are readily available. Add your own global objects if necessary.
 
 ### Scripts
 
