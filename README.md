@@ -1,102 +1,32 @@
-# MSF training DHIS2 webapps development
 
--   We are here to practice Dhis2 apps Development using React, Material-UI and Clean Architecture.
+# MSF training DHIS2 webapps development - session 1
+
+-   We are going to practice Dhis2 apps Development using React and Clean Architecture.
 -   Clean Architecture is a way of structuring code.
-
-## Training requirements - Contacts App
-
 -   It's necessary a dhis2 server instance
--   Fork and clone this repository
+-   The current code has been brought from the skeleton app
 
-## Branches
+## Training requirements 
 
--   Master contains full solution by EyeSeeTea (we recommended dont' see until the end)
--   session_1 is the branch for session 1 exercise
--   session_2 is the branch for session 1 exercise
--   session_3 is the branch for session 1 exercise
--   session_4 is the branch for session 1 exercise
+- We need to be able to list some org units of until three levels
+- We need to be able to click in a org unit and show a detail panel with name and openingDate
+- Every org unit has a computed data type where:
+    * Level 1 -> value is "Primary"
+    * Level 2 -> value is "Secondary"
+    * Level 3 -> value is "Tertiary"
+    * Level 4-> value is “Quaternary"
+- Only users with authority All (Full authority) can see details of all levels (1,2,3,4)
+- Users without authority All (Full authority) can see details of levels 1 y 2
 
-## Setup
+- Analyze the requirements to identify entities, use cases and repositories to create and where set the logic.
 
-Install dependencies:
-
-```
-$ yarn install
-```
 
 ## Development
 
-Start development server:
-
-```
-$ PORT=8081 REACT_APP_DHIS2_BASE_URL="http://localhost:8080" yarn start
-```
-
-Linting:
-
-```
-$ yarn lint
-```
-
-## Tests
-
-Run unit tests:
-
-```
-$ yarn test
-```
-
-Run integration tests locally:
-
-```
-$ export CYPRESS_DHIS2_AUTH='admin:district'
-$ export CYPRESS_EXTERNAL_API="http://localhost:8080"
-$ export CYPRESS_ROOT_URL=http://localhost:8081
-
-# non-interactive
-$ yarn cy:e2e:run
-
-# interactive UI
-$ yarn cy:e2e:open
-```
-
-For this to work in Travis, you will have to create an environment variable `CYPRESS_DHIS2_AUTH`
-(Settings -> Environment Variables) with the `user:password` used in your testing DHIS2 instance.
-
-## Build app ZIP
-
-```
-$ yarn build-webapp
-```
-
-## Some development tips
-
-### Structure
-
--   `i18n/`: Contains literal translations (gettext format)
--   `public/`: Main app folder with a `index.html`, exposes the APP, contains the feedback-tool.
--   `src/webapp`: Presentation UI Layer (clean architecture)
--   `src/webapp/pages`: Main React components.
--   `src/webapp/components`: Reusable React components.
--   `src/domain`: Domain layer of the app (clean architecture)
--   `src/data`: Data of the app (clean architecture)
--   `src/types`: `.d.ts` file types for modules without TS definitions.
--   `src/utils`: Misc utilities.
--   `src/locales`: Auto-generated, do not update or add to the version control.
--   `cypress/integration/`: Cypress integration tests.
-
-### i18n
-
-```
-$ yarn update-po
-# ... add/edit translations in i18n/*.po files ...
-$ yarn localize
-```
-
-### App context
-
-The file `src/contexts/app-context.ts` holds some general context so typical infrastructure objects (`api`, `d2`, ...) are readily available. Add your own global objects if necessary.
-
-### Scripts
-
-Check the example script, entry `"script-example"`in `package.json`->scripts and `src/scripts/example.ts`.
+ - UI will be development in the new training page
+ - From the current code you only can to use the composition root and new training page
+ - Create al css styles in TrainingPage.css. Style creation will change in the future sessions to other approaches
+ - All data is fake in memory.
+ - The data origin will change in the future sessions to consume a remote API.
+ - In this sessión we are not going to use Material-UI, use standard html tags ul, li, div, span what you want
+ - The created components will change in the future sessions to use Material-UI and Eyeseetea libraries
