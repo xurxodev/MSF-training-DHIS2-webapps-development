@@ -5,7 +5,7 @@ import "./TrainingPage.css";
 const TrainingPage: React.FC = () => {
     return (
         <div id="training-container">
-            <h1>{i18n.t("Training!!")}</h1>
+            <h1>{i18n.t("Training - Session 1")}</h1>
         </div>
     );
 };
