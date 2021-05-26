@@ -1,20 +1,20 @@
-# MSF training DHIS2 webapps development
+# DHIS2 webapps development - MSF training - HMIS Configuration App
 
--   We are here to practice Dhis2 apps Development using React, Material-UI and Clean Architecture.
--   Clean Architecture is a way of structuring code.
+-   DHIS2 web application development using React, Material-UI and Clean Architecture.
 
-## Training requirements - Contacts App
+## Training requirements 
 
--   It's necessary a dhis2 server instance
--   Fork and clone this repository
+-   A DHIS2 server instance up and running with CORS enabled for the localhost:8080
+-   You will have to fork and clone this repository
+-   Install yarn and npm
 
 ## Branches
 
--   Master contains full solution by EyeSeeTea (we recommended dont' see until the end)
+-   Master contains the full solution developed by EyeSeeTea (we recommended not to see the solution until the last session)
 -   [session_1](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_1) is the branch for session 1 exercise
--   [session_2](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_2) is the branch for session 1 exercise
--   session_3 is the branch for session 1 exercise
--   session_4 is the branch for session 1 exercise
+-   [session_2](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_2) is the branch for session 2 exercise (work in progress)
+-   session_3 is the branch for session 3 exercise (work in progress)
+-   session_4 is the branch for session 4 exercise (work in progress)
 
 ## Setup
 
@@ -29,7 +29,7 @@ $ yarn install
 Start development server:
 
 ```
-$ PORT=8081 REACT_APP_DHIS2_BASE_URL="http://localhost:8080" yarn start
+$ PORT=8081 REACT_APP_DHIS2_BASE_URL="DHIS2_INSTANCE_URL" yarn start
 ```
 
 Linting:
@@ -50,7 +50,7 @@ Run integration tests locally:
 
 ```
 $ export CYPRESS_DHIS2_AUTH='admin:district'
-$ export CYPRESS_EXTERNAL_API="http://localhost:8080"
+$ export CYPRESS_EXTERNAL_API="DHIS2_INSTANCE_URL"
 $ export CYPRESS_ROOT_URL=http://localhost:8081
 
 # non-interactive
@@ -59,9 +59,6 @@ $ yarn cy:e2e:run
 # interactive UI
 $ yarn cy:e2e:open
 ```
-
-For this to work in Travis, you will have to create an environment variable `CYPRESS_DHIS2_AUTH`
-(Settings -> Environment Variables) with the `user:password` used in your testing DHIS2 instance.
 
 ## Build app ZIP
 
