@@ -38,6 +38,29 @@ Linting:
 $ yarn lint
 ```
 
+## Browsers
+
+If you have SameSite policy problems run in chrome, launch Chrome from terminal:
+
+OSX
+```
+open -a Google\ Chrome --args -disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure --user-data-dir
+```
+
+Linux
+```
+ google-chrome --disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure
+```
+
+Windows
+```
+chrome -disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure
+```
+
+Remember that you can add other flags to that call 
+
+`--disable-web-security`
+
 ## Tests
 
 Run unit tests:
