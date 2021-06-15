@@ -3,96 +3,126 @@
         "id": "H8RixfF8ugH",
         "name": "Organisation unit root",
         "openingDate": "2003-02-28T00:00:00.000",
-        "level": 1
+        "level": 1,
+        "children": [
+            { "id": "seHJdofSPcM", "name": "Organisation unit 1" },
+            { "id": "wP2zKq0dDpw", "name": "Organisation unit 2" },
+            { "id": "yWc1CTszR3s", "name": "Organisation unit 3" },
+            { "id": "apVWLKfARpb", "name": "Organisation unit 4" },
+            { "id": "XjHXb0aFH5w", "name": "Organisation unit 5" },
+            { "id": "jkyBvNzcTLl", "name": "Organisation unit 6" }
+        ]
     },
     {
         "id": "seHJdofSPcM",
         "name": "Organisation unit 1",
         "openingDate": "2021-01-01T00:00:00.000",
-        "level": 2
+        "level": 2,
+        "children": [{ "id": "afomkmfy9xk", "name": "Organisation unit 1.1" }]
     },
     {
         "id": "afomkmfy9xk",
         "name": "Organisation unit 1.1",
         "openingDate": "1995-01-01T00:00:00.000",
-        "level": 3
+        "level": 3,
+        "children": [{ "id": "zXAaAXzwt4M", "name": "Organisation unit 1.1.1" }]
     },
     {
         "id": "zXAaAXzwt4M",
         "name": "Organisation unit 1.1.1",
         "openingDate": "19996-01-01T00:00:00.000",
-        "level": 4
+        "level": 4,
+        "children": []
     },
     {
         "id": "wP2zKq0dDpw",
         "name": "Organisation unit 2",
         "openingDate": "2001-01-01T00:00:00.000",
-        "level": 2
+        "level": 2,
+        "children": [{ "id": "RA5zxsbittk", "name": "Organisation unit 2.1" }]
     },
     {
         "id": "RA5zxsbittk",
         "name": "Organisation unit 2.1",
         "openingDate": "2012-01-01T00:00:00.000",
-        "level": 3
+        "level": 3,
+        "children": []
     },
     {
         "id": "yWc1CTszR3s",
         "name": "Organisation unit 3",
         "openingDate": "2005-01-01T00:00:00.000",
-        "level": 2
+        "level": 2,
+        "children": [
+            { "id": "svSQSBLTVz6", "name": "Organisation unit 3.1" },
+            { "id": "E9G2aQpCs1A", "name": "Organisation unit 3.2" }
+        ]
     },
     {
         "id": "svSQSBLTVz6",
         "name": "Organisation unit 3.1",
         "openingDate": "2000-01-01T00:00:00.000",
-        "level": 3
+        "level": 3,
+        "children": [{ "id": "cRWrIpjzvVl", "name": "Organisation unit 3.1.1" }]
     },
     {
         "id": "cRWrIpjzvVl",
         "name": "Organisation unit 3.1.1",
         "openingDate": "2016-01-01T00:00:00.000",
-        "level": 4
+        "level": 4,
+        "children": []
     },
     {
         "id": "E9G2aQpCs1A",
         "name": "Organisation unit 3.2",
         "openingDate": "2018-01-01T00:00:00.000",
-        "level": 3
+        "level": 3,
+        "children": [
+            { "id": "pGLy2Zj2lVg", "name": "Organisation unit 3.2.1" },
+            { "id": "vg4b11FL2Gl", "name": "Organisation unit 3.2.2" },
+            { "id": "f4ZFD2aswys", "name": "Organisation unit 3.2.3" }
+        ]
     },
     {
         "id": "pGLy2Zj2lVg",
         "name": "Organisation unit 3.2.1",
         "openingDate": "2019-01-01T00:00:00.000",
-        "level": 4
+        "level": 4,
+        "children": []
     },
     {
         "id": "vg4b11FL2Gl",
         "name": "Organisation unit 3.2.2",
         "openingDate": "2020-01-01T00:00:00.000",
-        "level": 4
+        "level": 4,
+        "children": []
     },
     {
         "id": "f4ZFD2aswys",
         "name": "Organisation unit 3.2.3",
         "openingDate": "1970-01-01T00:00:00.000",
-        "level": 4
+        "level": 4,
+        "children": []
     },
     {
         "id": "apVWLKfARpb",
         "name": "Organisation unit 4",
         "openingDate": "1970-01-01T00:00:00.000",
-        "level": 2
+        "level": 2,
+        "children": []
     },
     {
         "id": "XjHXb0aFH5w",
         "name": "Organisation unit 5",
         "openingDate": "1970-01-01T00:00:00.000",
-        "level": 2
+        "level": 2,
+        "children": []
     },
     {
         "id": "jkyBvNzcTLl",
         "name": "Organisation unit 6",
         "openingDate": "1970-01-01T00:00:00.000",
-        "level": 2
+        "level": 2,
+        "children": []
     }
 ]

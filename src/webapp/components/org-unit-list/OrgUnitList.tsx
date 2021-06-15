@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import styled from "styled-components";
 import { Id } from "../../../domain/entities/Base";
 import { OrgUnit } from "../../../domain/entities/OrgUnit";
 import { useAppContext } from "../../contexts/app-context";
-import "./OrgUnitList.css";
+import { TreeView } from "../tree-view/TreeView";
+import { TreeViewNode } from "../tree-view/TreeViewNode";
 
 interface OrgUnitListProps {
     onSelectedOrgUnit?: (orgUnitId: Id) => void;
@@ -10,29 +12,49 @@ interface OrgUnitListProps {
 
 const OrgUnitList: React.FC<OrgUnitListProps> = ({ onSelectedOrgUnit }) => {
     const { compositionRoot } = useAppContext();
-    const [orgUnits, setOrgUnits] = useState<OrgUnit[]>([]);
+    const [roots, setOrgUnitRoots] = useState<TreeViewNode[]>([]);
+
+    const findOrgUnit = useCallback(
+        async (ids: string[]) => {
+            const orgUnits = await compositionRoot.orgUnits.getByIds.execute(ids);
+            return buildNodes(orgUnits);
+        },
+        [compositionRoot]
+    );
 
     useEffect(() => {
-        compositionRoot.orgUnits.get.execute().then(setOrgUnits);
-    }, [compositionRoot.orgUnits.get]);
-
-    const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        if (onSelectedOrgUnit) {
-            onSelectedOrgUnit(event.target.value);
-        }
-    };
+        compositionRoot.orgUnits.getByLevel
+            .execute(1)
+            .then(orgUnits => setOrgUnitRoots(buildNodes(orgUnits)));
+    }, [compositionRoot]);
 
     return (
-        <select id="org-units" name="org units" size={orgUnits.length} onChange={handleOnChange}>
-            {orgUnits.map(orgUnit => {
-                return (
-                    <option key={orgUnit.id} value={orgUnit.id}>
-                        {orgUnit.name}
-                    </option>
-                );
-            })}
-        </select>
+        <Container>
+            {roots.map(root => (
+                <TreeView
+                    key={`tree-${root.id}`}
+                    root={root}
+                    findNodes={findOrgUnit}
+                    onNodeSelect={onSelectedOrgUnit}
+                />
+            ))}
+        </Container>
     );
 };
+
+function buildNodes(orgUnits: OrgUnit[]): TreeViewNode[] {
+    return orgUnits.map(({ id, name, children, closedDate }) => ({
+        id,
+        name,
+        children,
+        strikeout: closedDate !== undefined,
+    }));
+}
+
+const Container = styled.div`
+    display: block;
+    width: 100%;
+    overflow: auto;
+`;
 
 export default OrgUnitList;

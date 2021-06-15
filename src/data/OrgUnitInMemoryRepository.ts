@@ -6,7 +6,11 @@ import orgUnitsData from "./orgUnits.json";
 export class OrgUnitInMemoryRepository implements OrgUnitRepository {
     async get(): Promise<OrgUnit[]> {
         return orgUnitsData.map(data =>
-            OrgUnit.create({ ...data, openingDate: new Date(data.openingDate) })
+            OrgUnit.create({
+                ...data,
+                openingDate: new Date(data.openingDate),
+                closedDate: undefined,
+            })
         );
     }
 
@@ -15,6 +19,34 @@ export class OrgUnitInMemoryRepository implements OrgUnitRepository {
 
         if (!orgUnitData) throw Error(`OrgUnit ${id} not found`);
 
-        return OrgUnit.create({ ...orgUnitData, openingDate: new Date(orgUnitData.openingDate) });
+        return OrgUnit.create({
+            ...orgUnitData,
+            openingDate: new Date(orgUnitData.openingDate),
+            closedDate: undefined,
+        });
+    }
+
+    async getByIds(ids: Id[]): Promise<OrgUnit[]> {
+        return orgUnitsData
+            .filter(({ id }) => ids.includes(id))
+            .map(data =>
+                OrgUnit.create({
+                    ...data,
+                    openingDate: new Date(data.openingDate),
+                    closedDate: undefined,
+                })
+            );
+    }
+
+    async getByLevel(level: number): Promise<OrgUnit[]> {
+        return orgUnitsData
+            .filter(orgUnit => orgUnit.level === level)
+            .map(data =>
+                OrgUnit.create({
+                    ...data,
+                    openingDate: new Date(data.openingDate),
+                    closedDate: undefined,
+                })
+            );
     }
 }
