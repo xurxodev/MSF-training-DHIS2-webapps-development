@@ -1,23 +1,21 @@
-import { D2Api } from "./types/d2-api";
-import { Dhis2DataValueRepository } from "./data/Dhis2DataValueRepository";
-import { GetDataValuesUseCase } from "./domain/usecases/GetDataValuesUseCase";
 import { OrgUnitInMemoryRepository } from "./data/OrgUnitInMemoryRepository";
-import { GetOrgUnitsUseCase } from "./domain/usecases/GetOrgUnitsUseCase";
+import { UserDHIS2Repository } from "./data/UserDHIS2Repository";
+import { GetCurrentUserUseCase } from "./domain/usecases/GetCurrentUserUseCase";
 import { GetOrgUnitByIdUseCase } from "./domain/usecases/GetOrgUnitByIdUseCase";
-import { UserInMemoryRepository } from "./data/UserInMemoryRepository";
+import { GetOrgUnitsUseCase } from "./domain/usecases/GetOrgUnitsUseCase";
+import { D2Api } from "./types/d2-api";
 
 export function getCompositionRoot(api: D2Api) {
-    const dataValueRepository = new Dhis2DataValueRepository(api);
     const orgUnitRepository = new OrgUnitInMemoryRepository();
-    const userRepository = new UserInMemoryRepository();
+    const userRepository = new UserDHIS2Repository(api);
 
     return {
-        dataValues: {
-            get: new GetDataValuesUseCase(dataValueRepository),
-        },
         orgUnits: {
             get: new GetOrgUnitsUseCase(orgUnitRepository),
             getById: new GetOrgUnitByIdUseCase(orgUnitRepository, userRepository),
+        },
+        users: {
+            getCurrent: new GetCurrentUserUseCase(userRepository),
         },
     };
 }
