@@ -30,12 +30,12 @@ export const TrainingPage: React.FC = () => {
 const Container = styled.div`
     display: flex;
     flex-direction: row;
-    height: 90vh;
+    height: 95vh;
 `;
 
 const LeftPanel = styled.div`
     background-color: #f5f5f5;
-    width: 300px;
+    width: 400px;
     display: flex;
     justify-content: center;
 `;

@@ -1,48 +1,46 @@
-import { Id, NamedRef } from "./Base";
-
-// maybe a class with validations in the future or a types with extended props
-type OpeningDate = Date;
-type ClosedDate = Date | undefined;
-type Level = number;
-type OrgUnitName = string;
-type OrgUnitType = string;
-
+import _ from "lodash";
+import { OrgUnitLevels } from "../../data/Constants";
+import { NamedRef } from "./Base";
+import { OrgUnitLevel } from "./OrgUnitLevel";
 interface OrgUnitData {
-    id: Id;
-    openingDate: OpeningDate;
-    closedDate: ClosedDate;
-    name: OrgUnitName;
-    level: Level;
+    id: string;
+    code: string | undefined;
+    openingDate: Date | undefined;
+    closedDate: Date | undefined;
+    name: string;
+    level: number;
     children: NamedRef[];
+    organisationUnitGroups: NamedRef[];
 }
 
-const levelToType: Record<number, string> = {
-    1: "Primary",
-    2: "Secondary",
-    3: "Tertiary",
-    4: "Quaternary",
-};
+const levelToType = _.invert(OrgUnitLevels);
 
 export class OrgUnit {
-    readonly id: Id;
-    readonly openingDate: OpeningDate;
-    readonly closedDate: ClosedDate;
-    readonly name: OrgUnitName;
-    readonly level: Level;
-    readonly type: OrgUnitType;
+    readonly id: string;
+    readonly code: string;
+    readonly name: string;
+    readonly openingDate: Date | undefined;
+    readonly closedDate: Date | undefined;
+
+    readonly level: number;
+    readonly type: OrgUnitLevel;
 
     readonly children: NamedRef[];
+    readonly organisationUnitGroups: NamedRef[];
 
-    private constructor({ id, name, openingDate, closedDate, level, children }: OrgUnitData) {
-        this.id = id;
-        this.openingDate = openingDate;
-        this.closedDate = closedDate;
-        this.name = name;
-        this.level = level;
+    private constructor(data: OrgUnitData) {
+        this.id = data.id;
+        this.code = data.code ?? "";
+        this.name = data.name;
+        this.openingDate = data.openingDate;
+        this.closedDate = data.closedDate;
+        this.name = data.name;
 
-        this.type = levelToType[level];
+        this.level = data.level;
+        this.type = levelToType[data.level] as OrgUnitLevel;
 
-        this.children = children;
+        this.children = data.children;
+        this.organisationUnitGroups = data.organisationUnitGroups;
     }
 
     // Factory method - In the future could return creation errors

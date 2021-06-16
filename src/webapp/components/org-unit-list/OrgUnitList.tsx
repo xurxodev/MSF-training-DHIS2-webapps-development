@@ -24,8 +24,10 @@ const OrgUnitList: React.FC<OrgUnitListProps> = ({ onSelectedOrgUnit }) => {
 
     useEffect(() => {
         compositionRoot.orgUnits.getByLevel
-            .execute(1)
-            .then(orgUnits => setOrgUnitRoots(buildNodes(orgUnits)));
+            .execute(2)
+            .then(orgUnits =>
+                setOrgUnitRoots(buildNodes(orgUnits.filter(({ name }) => name === "OCBA")))
+            );
     }, [compositionRoot]);
 
     return (
@@ -55,6 +57,7 @@ const Container = styled.div`
     display: block;
     width: 100%;
     overflow: auto;
+    padding: 10px;
 `;
 
 export default OrgUnitList;

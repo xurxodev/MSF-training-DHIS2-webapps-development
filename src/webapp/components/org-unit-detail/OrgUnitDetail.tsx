@@ -1,9 +1,12 @@
+import { Paper } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { Id } from "../../../domain/entities/Base";
 import { OrgUnit } from "../../../domain/entities/OrgUnit";
-import { useAppContext } from "../../contexts/app-context";
-import "./OrgUnitDetail.css";
+import { OrgUnitLevel } from "../../../domain/entities/OrgUnitLevel";
 import i18n from "../../../locales";
+import { useAppContext } from "../../contexts/app-context";
+import { ProjectLevelDetails } from "./levels/ProjectLevelDetails";
 
 interface OrgUnitsDetailProps {
     orgUnitId: Id;
@@ -12,48 +15,59 @@ interface OrgUnitsDetailProps {
 const OrgUnitDetail: React.FC<OrgUnitsDetailProps> = ({ orgUnitId }) => {
     const { compositionRoot } = useAppContext();
     const [orgUnit, setOrgUnit] = useState<OrgUnit>();
-    const [error, setError] = useState<string>();
 
     useEffect(() => {
-        compositionRoot.orgUnits.getById
-            .execute(orgUnitId)
-            .then(orgUnit => {
-                setOrgUnit(orgUnit);
-                setError(undefined);
-            })
-            .catch(error => {
-                setOrgUnit(undefined);
-                setError(error.message);
-            });
-    }, [compositionRoot.orgUnits.getById, orgUnitId]);
+        compositionRoot.orgUnits.getById.execute(orgUnitId).then(setOrgUnit);
+    }, [compositionRoot, orgUnitId]);
+
+    if (!orgUnit) {
+        return (
+            <Container>
+                {i18n.t("Organisation unit {{orgUnitId}} not found", { orgUnitId })}
+            </Container>
+        );
+    }
 
     return (
-        <div id="details-container">
-            {orgUnit && (
-                <div>
-                    <div>
-                        <label>{i18n.t("Name")}</label>
-                        <input type="text" value={orgUnit?.name} disabled />
-                    </div>
+        <Container>
+            <h2>{formatOrgUnitLevel(orgUnit.type)}</h2>
 
-                    <div>
-                        <label>{i18n.t("Opening Date")}</label>
-                        <input
-                            type="text"
-                            value={orgUnit?.openingDate.toLocaleDateString()}
-                            disabled
-                        />
-                    </div>
-
-                    <div>
-                        <label>{i18n.t("Type")}</label>
-                        <input type="text" value={orgUnit?.type} disabled />
-                    </div>
-                </div>
-            )}
-            {error && error}
-        </div>
+            <DetailsByLevel orgUnit={orgUnit} />
+        </Container>
     );
 };
+
+const DetailsByLevel: React.FC<{ orgUnit: OrgUnit }> = ({ orgUnit }) => {
+    switch (orgUnit.type) {
+        case "Project":
+            return <ProjectLevelDetails orgUnit={orgUnit} />;
+        default:
+            return null;
+    }
+};
+
+const Container = styled(Paper)`
+    width: 90%;
+    margin: 16px;
+    border: 1px solid lightgrey;
+    padding: 25px;
+`;
+
+function formatOrgUnitLevel(level: OrgUnitLevel): string {
+    switch (level) {
+        case "MSF":
+            return i18n.t("MSF");
+        case "Project":
+            return i18n.t("Project");
+        case "OperationalCenter":
+            return i18n.t("Operational Center");
+        case "Mission":
+            return i18n.t("Mission");
+        case "HealthSite":
+            return i18n.t("Health Site");
+        case "HealthService":
+            return i18n.t("Health Service");
+    }
+}
 
 export default OrgUnitDetail;
