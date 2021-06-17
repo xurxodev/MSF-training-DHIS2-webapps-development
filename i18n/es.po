@@ -73,15 +73,3 @@ msgstr "Ayuda"
 
 msgid "Training session 2"
 msgstr ""
-
-#~ msgid "Click to show feedback"
-#~ msgstr "Toca para ver feedback"
-
-#~ msgid "Add"
-#~ msgstr "Añadir"
-
-#~ msgid "List"
-#~ msgstr "Listar"
-
-#~ msgid "configuration"
-#~ msgstr "Configuración"
