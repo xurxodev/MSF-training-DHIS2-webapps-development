@@ -1,3 +1,4 @@
+import { useSnackbar } from "@eyeseetea/d2-ui-components";
 import { Paper } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -15,10 +16,28 @@ interface OrgUnitsDetailProps {
 const OrgUnitDetail: React.FC<OrgUnitsDetailProps> = ({ orgUnitId }) => {
     const { compositionRoot } = useAppContext();
     const [orgUnit, setOrgUnit] = useState<OrgUnit>();
+    const [orgUnitToSave, setOrgUnitToSave] = useState<OrgUnit>();
 
     useEffect(() => {
         compositionRoot.orgUnits.getById.execute(orgUnitId).then(setOrgUnit);
     }, [compositionRoot, orgUnitId]);
+
+    const snackbar = useSnackbar();
+
+    useEffect(() => {
+        async function saveOrgUnit(orgUnit: OrgUnit) {
+            try {
+                await compositionRoot.orgUnits.save.execute(orgUnit);
+                setOrgUnit(orgUnit);
+                setOrgUnitToSave(undefined);
+                snackbar.success(i18n.t("Project saved"));
+            } catch (err) {
+                snackbar.error(err.message);
+            }
+        }
+
+        if (orgUnitToSave) saveOrgUnit(orgUnitToSave);
+    }, [orgUnit, setOrgUnit, orgUnitToSave, setOrgUnitToSave, compositionRoot, snackbar]);
 
     if (!orgUnit) {
         return (
@@ -32,15 +51,18 @@ const OrgUnitDetail: React.FC<OrgUnitsDetailProps> = ({ orgUnitId }) => {
         <Container>
             <h2>{formatOrgUnitLevel(orgUnit.type)}</h2>
 
-            <DetailsByLevel orgUnit={orgUnit} />
+            <DetailsByLevel orgUnit={orgUnit} onSave={setOrgUnitToSave} />
         </Container>
     );
 };
 
-const DetailsByLevel: React.FC<{ orgUnit: OrgUnit }> = ({ orgUnit }) => {
+const DetailsByLevel: React.FC<{ orgUnit: OrgUnit; onSave(orgUnit: OrgUnit): void }> = ({
+    onSave,
+    orgUnit,
+}) => {
     switch (orgUnit.type) {
         case "Project":
-            return <ProjectLevelDetails orgUnit={orgUnit} />;
+            return <ProjectLevelDetails orgUnit={orgUnit} onSave={onSave} />;
         default:
             return null;
     }

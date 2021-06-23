@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2021-06-16T11:22:27.225Z\n"
-"PO-Revision-Date: 2021-06-16T11:22:27.225Z\n"
+"POT-Creation-Date: 2021-06-23T06:33:30.930Z\n"
+"PO-Revision-Date: 2021-06-23T06:33:30.930Z\n"
 
 msgid "Organisation unit is assigned to more than one option"
 msgstr ""
@@ -27,6 +27,9 @@ msgid "Project type"
 msgstr ""
 
 msgid "Unknown group set"
+msgstr ""
+
+msgid "Project saved"
 msgstr ""
 
 msgid "Organisation unit {{orgUnitId}} not found"
@@ -63,6 +66,12 @@ msgid "Opening Date"
 msgstr ""
 
 msgid "Code"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Clear form"
 msgstr ""
 
 msgid "Back"

@@ -6,4 +6,5 @@ export interface OrgUnitRepository {
     getById(id: Id): Promise<OrgUnit | undefined>;
     getByIds(ids: Id[]): Promise<OrgUnit[]>;
     getByLevel(level: number): Promise<OrgUnit[]>;
+    save(orgUnit: OrgUnit): Promise<void>;
 }

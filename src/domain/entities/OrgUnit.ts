@@ -47,4 +47,18 @@ export class OrgUnit {
     static create(data: OrgUnitData) {
         return new OrgUnit(data);
     }
+
+    set<T extends keyof OrgUnitData>(key: T, value: OrgUnitData[T]): OrgUnit {
+        return OrgUnit.create({ ...this, [key]: value });
+    }
+
+    setOrganisationUnitGroups(selected: NamedRef[], unselected: NamedRef[]): OrgUnit {
+        const selectedIds = new Set(selected.map(group => group.id));
+        const unselectedIds = new Set(unselected.map(group => group.id));
+        const newOrgUnitGroups = _(this.organisationUnitGroups)
+            .filter(group => !unselectedIds.has(group.id) || !selectedIds.has(group.id))
+            .concat(selected)
+            .value();
+        return OrgUnit.create({ ...this, organisationUnitGroups: newOrgUnitGroups });
+    }
 }

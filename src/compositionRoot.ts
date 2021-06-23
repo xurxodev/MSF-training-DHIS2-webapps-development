@@ -7,6 +7,7 @@ import { GetOrgUnitByIdUseCase } from "./domain/usecases/GetOrgUnitByIdUseCase";
 import { GetOrgUnitsByIdsUseCase } from "./domain/usecases/GetOrgUnitsByIdsUseCase";
 import { GetOrgUnitsByLevelUseCase } from "./domain/usecases/GetOrgUnitsByLevelUseCase";
 import { GetOrgUnitsUseCase } from "./domain/usecases/GetOrgUnitsUseCase";
+import { SaveOrgUnitUseCase } from "./domain/usecases/SaveOrgUnitUseCase";
 import { D2Api } from "./types/d2-api";
 
 export function getCompositionRoot(api: D2Api) {
@@ -20,6 +21,7 @@ export function getCompositionRoot(api: D2Api) {
             getById: new GetOrgUnitByIdUseCase(orgUnitRepository),
             getByIds: new GetOrgUnitsByIdsUseCase(orgUnitRepository),
             getByLevel: new GetOrgUnitsByLevelUseCase(orgUnitRepository),
+            save: new SaveOrgUnitUseCase(orgUnitRepository),
         },
         groupSets: {
             getOptions: new GetGroupSetOptionsUseCase(groupSetRepository),
