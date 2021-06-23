@@ -39,15 +39,12 @@ export const GroupSetDropdown: React.FC<GroupSetDropdownProps> = ({
         });
     }, [compositionRoot, groupSet]);
 
-    const notifyChange = React.useCallback(
-        (groupId: string | undefined) => {
-            if (!onChange) return;
-            const selectedGroup = groups.filter(group => group.id === groupId);
-            const unselectedGroups = groups.filter(group => group.id !== groupId);
-            onChange(selectedGroup, unselectedGroups);
-        },
-        [onChange, groups]
-    );
+    function notifyChange(groupId: string | undefined) {
+        if (!onChange) return;
+        const selectedGroup = groups.filter(group => group.id === groupId);
+        const unselectedGroups = groups.filter(group => group.id !== groupId);
+        onChange(selectedGroup, unselectedGroups);
+    }
 
     return (
         <React.Fragment>
