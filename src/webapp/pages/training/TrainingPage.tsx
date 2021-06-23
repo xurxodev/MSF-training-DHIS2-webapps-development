@@ -19,7 +19,7 @@ export const TrainingPage: React.FC = () => {
             </LeftPanel>
 
             <RightPanel>
-                <h1>{i18n.t("Training session 2")}</h1>
+                <h1>{i18n.t("Training session 3")}</h1>
 
                 {selectedOrgUnit && <OrgUnitDetail orgUnitId={selectedOrgUnit} />}
             </RightPanel>
