@@ -8,9 +8,10 @@ import { TreeViewNode } from "../tree-view/TreeViewNode";
 
 interface OrgUnitListProps {
     onSelectedOrgUnit?: (orgUnitId: Id) => void;
+    refreshKey: Date;
 }
 
-const OrgUnitList: React.FC<OrgUnitListProps> = ({ onSelectedOrgUnit }) => {
+const OrgUnitList: React.FC<OrgUnitListProps> = ({ onSelectedOrgUnit, refreshKey }) => {
     const { compositionRoot } = useAppContext();
     const [roots, setOrgUnitRoots] = useState<TreeViewNode[]>([]);
 
@@ -28,7 +29,7 @@ const OrgUnitList: React.FC<OrgUnitListProps> = ({ onSelectedOrgUnit }) => {
             .then(orgUnits =>
                 setOrgUnitRoots(buildNodes(orgUnits.filter(({ name }) => name === "OCBA")))
             );
-    }, [compositionRoot]);
+    }, [compositionRoot, refreshKey]);
 
     return (
         <Container>

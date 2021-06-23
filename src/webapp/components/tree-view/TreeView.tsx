@@ -17,7 +17,6 @@ const BaseTreeView: React.FC<TreeViewProps> = ({ className, root, findNodes, onN
     return (
         <MUITreeView
             className={className}
-            defaultExpanded={["1"]}
             defaultCollapseIcon={<CloseIcon />}
             defaultExpandIcon={<OpenIcon />}
             onNodeSelect={

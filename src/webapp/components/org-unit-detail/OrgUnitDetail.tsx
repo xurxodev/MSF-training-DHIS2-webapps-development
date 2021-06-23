@@ -11,9 +11,10 @@ import { ProjectLevelDetails } from "./levels/ProjectLevelDetails";
 
 interface OrgUnitsDetailProps {
     orgUnitId: Id;
+    onSave(orgUnit: OrgUnit): void;
 }
 
-const OrgUnitDetail: React.FC<OrgUnitsDetailProps> = ({ orgUnitId }) => {
+const OrgUnitDetail: React.FC<OrgUnitsDetailProps> = ({ orgUnitId, onSave }) => {
     const { compositionRoot } = useAppContext();
     const [orgUnit, setOrgUnit] = useState<OrgUnit>();
     const [orgUnitToSave, setOrgUnitToSave] = useState<OrgUnit>();
@@ -28,6 +29,7 @@ const OrgUnitDetail: React.FC<OrgUnitsDetailProps> = ({ orgUnitId }) => {
         async function saveOrgUnit(orgUnit: OrgUnit) {
             try {
                 await compositionRoot.orgUnits.save.execute(orgUnit);
+                onSave(orgUnit);
                 setOrgUnit(orgUnit);
                 setOrgUnitToSave(undefined);
                 snackbar.success(i18n.t("Project saved"));
@@ -37,7 +39,7 @@ const OrgUnitDetail: React.FC<OrgUnitsDetailProps> = ({ orgUnitId }) => {
         }
 
         if (orgUnitToSave) saveOrgUnit(orgUnitToSave);
-    }, [orgUnit, setOrgUnit, orgUnitToSave, setOrgUnitToSave, compositionRoot, snackbar]);
+    }, [orgUnit, setOrgUnit, orgUnitToSave, setOrgUnitToSave, compositionRoot, snackbar, onSave]);
 
     if (!orgUnit) {
         return (

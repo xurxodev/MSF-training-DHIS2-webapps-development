@@ -7,21 +7,28 @@ import OrgUnitsList from "../../components/org-unit-list/OrgUnitList";
 
 export const TrainingPage: React.FC = () => {
     const [selectedOrgUnit, setSelectedOrgUnit] = useState<Id>();
+    const [refreshKey, setRefreshKey] = useState(new Date());
 
     const handleOnChange = (orgUnitId: Id) => {
         setSelectedOrgUnit(orgUnitId);
     };
 
+    const refreshOrgUnitsList = () => {
+        setRefreshKey(new Date());
+    };
+
     return (
         <Container>
             <LeftPanel>
-                <OrgUnitsList onSelectedOrgUnit={handleOnChange} />
+                <OrgUnitsList onSelectedOrgUnit={handleOnChange} refreshKey={refreshKey} />
             </LeftPanel>
 
             <RightPanel>
                 <h1>{i18n.t("Training session 3")}</h1>
 
-                {selectedOrgUnit && <OrgUnitDetail orgUnitId={selectedOrgUnit} />}
+                {selectedOrgUnit && (
+                    <OrgUnitDetail orgUnitId={selectedOrgUnit} onSave={refreshOrgUnitsList} />
+                )}
             </RightPanel>
         </Container>
     );
