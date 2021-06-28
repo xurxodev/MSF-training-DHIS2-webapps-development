@@ -56,7 +56,7 @@ export class OrgUnit {
         const selectedIds = new Set(selected.map(group => group.id));
         const unselectedIds = new Set(unselected.map(group => group.id));
         const newOrgUnitGroups = _(this.organisationUnitGroups)
-            .filter(group => !unselectedIds.has(group.id) || !selectedIds.has(group.id))
+            .filter(group => !unselectedIds.has(group.id) && !selectedIds.has(group.id))
             .concat(selected)
             .value();
         return OrgUnit.create({ ...this, organisationUnitGroups: newOrgUnitGroups });
