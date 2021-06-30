@@ -2,7 +2,7 @@ import _ from "lodash";
 import { Id, NamedRef } from "../domain/entities/Base";
 import { OrgUnit } from "../domain/entities/OrgUnit";
 import { OrgUnitRepository } from "../domain/repositories/OrgUnitRepository";
-import { D2Api, D2ApiDefinition, D2OrganisationUnitSchema, Model } from "../types/d2-api";
+import { D2Api, D2ApiDefinition, D2OrganisationUnitSchema, Model, Ref } from "../types/d2-api";
 
 interface D2OrgUnit {
     id: Id;
@@ -11,7 +11,7 @@ interface D2OrgUnit {
     shortName: string;
     level: number;
     path: string;
-    parent: NamedRef;
+    parent: Ref;
     openingDate?: string;
     closedDate?: string;
     children: NamedRef[];
@@ -107,15 +107,7 @@ export class OrgUnitDHIS2Repository implements OrgUnitRepository {
             .get({
                 ...options,
                 fields: {
-                    id: true,
-                    code: true,
-                    name: true,
-                    shortName: true,
-                    path: true,
-                    level: true,
-                    openingDate: true,
-                    closedDate: true,
-                    parent: { id: true, name: true },
+                    $owner: true,
                     children: { id: true, name: true },
                     organisationUnitGroups: { id: true, name: true },
                 },
