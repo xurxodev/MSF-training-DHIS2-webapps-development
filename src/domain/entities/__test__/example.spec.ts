@@ -12,3 +12,5 @@ describe("Example group1", () => {
         });
     });
 });
+
+export default {}
