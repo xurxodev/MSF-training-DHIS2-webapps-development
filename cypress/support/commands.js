@@ -96,3 +96,10 @@ Cypress.Commands.add("selectInDropdown", (containerSelector, label, option) => {
 
     cy.get('[role="listbox"]').contains(option).click();
 });
+
+// Commands using Cypress Testing Library
+Cypress.Commands.add("expandNode", label => {
+    cy.findByText(label);
+    cy.findAllByRole("progressbar").should("not.exist");
+    cy.findByText(label).click();
+});
