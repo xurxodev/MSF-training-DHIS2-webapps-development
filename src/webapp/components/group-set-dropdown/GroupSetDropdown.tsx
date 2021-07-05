@@ -16,21 +16,21 @@ export interface GroupSetDropdownProps {
     onChange?(selectedGroups: NamedRef[], unselectedGroups: NamedRef[]): void;
 }
 
-export const GroupSetDropdown: React.FC<GroupSetDropdownProps> = ({
-    groupSet,
-    orgUnit,
-    disabled,
-    onChange,
-}) => {
+export const GroupSetDropdown: React.FC<GroupSetDropdownProps> = React.memo(props => {
+    const { groupSet, orgUnit, disabled, onChange } = props;
     const { compositionRoot } = useAppContext();
 
     const [groups, setGroups] = useState<NamedRef[]>([]);
 
-    const groupOptions = namedRefToOption(groups);
+    const groupOptions = React.useMemo(() => namedRefToOption(groups), [groups]);
 
-    const intersection = _.intersection(
-        orgUnit.organisationUnitGroups.map(({ id }) => id),
-        groupOptions.map(({ value }) => value)
+    const intersection = React.useMemo(
+        () =>
+            _.intersection(
+                orgUnit.organisationUnitGroups.map(({ id }) => id),
+                groupOptions.map(({ value }) => value)
+            ),
+        [groupOptions, orgUnit]
     );
 
     useEffect(() => {
@@ -39,12 +39,15 @@ export const GroupSetDropdown: React.FC<GroupSetDropdownProps> = ({
         });
     }, [compositionRoot, groupSet]);
 
-    function notifyChange(groupId: string | undefined) {
-        if (!onChange) return;
-        const selectedGroup = groups.filter(group => group.id === groupId);
-        const unselectedGroups = groups.filter(group => group.id !== groupId);
-        onChange(selectedGroup, unselectedGroups);
-    }
+    const notifyChange = React.useCallback(
+        (groupId: string | undefined) => {
+            if (!onChange) return;
+            const selectedGroup = groups.filter(group => group.id === groupId);
+            const unselectedGroups = groups.filter(group => group.id !== groupId);
+            onChange(selectedGroup, unselectedGroups);
+        },
+        [onChange, groups]
+    );
 
     return (
         <React.Fragment>
@@ -65,7 +68,7 @@ export const GroupSetDropdown: React.FC<GroupSetDropdownProps> = ({
             ) : null}
         </React.Fragment>
     );
-};
+});
 
 function namedRefToOption(options: NamedRef[]): DropdownItem[] {
     return options.map(({ id, name }) => ({ value: id, text: name }));
