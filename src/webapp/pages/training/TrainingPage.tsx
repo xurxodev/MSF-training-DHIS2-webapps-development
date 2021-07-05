@@ -24,7 +24,7 @@ export const TrainingPage: React.FC = () => {
             </LeftPanel>
 
             <RightPanel>
-                <h1>{i18n.t("Training session 3")}</h1>
+                <h1>{i18n.t("Training session 4")}</h1>
 
                 {selectedOrgUnit && (
                     <OrgUnitDetail orgUnitId={selectedOrgUnit} onSave={refreshOrgUnitsList} />

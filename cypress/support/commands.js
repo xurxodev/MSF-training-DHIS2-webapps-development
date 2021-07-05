@@ -1,5 +1,7 @@
 // <reference types="Cypress" />
 
+import "@testing-library/cypress/add-commands";
+
 import _ from "lodash";
 
 const externalUrl = Cypress.env("EXTERNAL_API");

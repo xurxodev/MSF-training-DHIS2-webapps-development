@@ -1,41 +1,57 @@
 name: CI
 on: [push]
 jobs:
-    unit-tests:
-        name: Unit tests
-        runs-on: ubuntu-latest
-        env:
-            REACT_APP_ENV: staging
-        steps:
-            - name: Preparation
-              run: sudo apt install gettext
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    env:
+        REACT_APP_ENV: staging
+    steps:
+      - name: Preparation
+        run: sudo apt install gettext
 
-            - name: Checkout repository
-              uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-            - name: Setup Node
-              uses: actions/setup-node@v1
-              with:
-                  node-version: "12.x"
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+            node-version: "12.x"
 
-            - name: Get yarn cache directory path
-              id: yarn-cache-dir-path
-              run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-            - name: Cache yarn dependencies
-              uses: actions/cache@v2
-              id: yarn-cache
-              with:
-                  path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-yarn-
+      - name: Cache yarn dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+            path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+                ${{ runner.os }}-yarn-
 
-            - name: Installing Dependencies
-              run: yarn install --frozen-lockfile --silent
+      - name: Installing Dependencies
+        run: yarn install --frozen-lockfile --silent
 
-            - name: Generate locales
-              run: yarn localize
+      - name: Generate locales
+        run: yarn localize
 
-            - name: Run jest tests
-              run: yarn test
+      - name: Run jest tests
+        run: yarn test
+    cypress:
+      name: Cypress tests
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: cypress-io/github-action@v2
+          env:
+            CYPRESS_DHIS2_AUTH: ${{ secrets.CYPRESS_DHIS2_AUTH }}
+            CYPRESS_ROOT_URL: http://localhost:8081
+            CYPRESS_EXTERNAL_API: http://ec2-54-195-131-72.eu-west-1.compute.amazonaws.com
+          with:
+            browser: electron
+            headless: true
+            install-command: yarn install --frozen-lockfile --silent
+            start: yarn start
+            wait-on: "http://localhost:3000"

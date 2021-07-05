@@ -67,6 +67,7 @@
     "devDependencies": {
         "@babel/core": "7.12.10",
         "@babel/preset-typescript": "7.12.7",
+        "@testing-library/cypress": "^7.0.6",
         "@testing-library/jest-dom": "5.11.6",
         "@testing-library/react": "11.2.2",
         "@types/argparse": "2.0.4",

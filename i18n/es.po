@@ -80,5 +80,5 @@ msgstr "Volver"
 msgid "Help"
 msgstr "Ayuda"
 
-msgid "Training session 3"
+msgid "Training session 4"
 msgstr ""
