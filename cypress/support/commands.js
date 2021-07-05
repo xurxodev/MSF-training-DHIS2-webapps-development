@@ -1,5 +1,7 @@
 // <reference types="Cypress" />
 
+import "@testing-library/cypress/add-commands";
+
 import _ from "lodash";
 
 const externalUrl = Cypress.env("EXTERNAL_API");
@@ -93,4 +95,11 @@ Cypress.Commands.add("selectInDropdown", (containerSelector, label, option) => {
     parent.contains(label).parent().click();
 
     cy.get('[role="listbox"]').contains(option).click();
+});
+
+// Commands using Cypress Testing Library
+Cypress.Commands.add("expandNode", label => {
+    cy.findByText(label);
+    cy.findAllByRole("progressbar").should("not.exist");
+    cy.findByText(label).click();
 });
