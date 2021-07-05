@@ -30,7 +30,8 @@ jobs:
           browser: firefox
           headless: true
           install-command: yarn install --frozen-lockfile --silent
-          start: REACT_APP_DHIS2_BASE_URL=http://ec2-54-195-131-72.eu-west-1.compute.amazonaws.com yarn start
+          env: REACT_APP_DHIS2_BASE_URL=http://ec2-54-195-131-72.eu-west-1.compute.amazonaws.com 
+          start: yarn start
           wait-on: 'http://localhost:8081'
         env:
           CYPRESS_DHIS2_AUTH: ${{ secrets.CYPRESS_DHIS2_AUTH }}
