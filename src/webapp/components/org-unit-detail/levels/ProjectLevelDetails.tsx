@@ -36,6 +36,7 @@ export const ProjectLevelDetails: React.FC<ProjectLevelDetailsProps> = props => 
         <Container>
             <Row>
                 <NameInput
+                    id="name"
                     label={i18n.t("Name")}
                     value={orgUnit.name}
                     disabled={!editable}
