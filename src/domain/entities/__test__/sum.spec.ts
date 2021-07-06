@@ -1,6 +1,4 @@
-function sum(a: number, b: number) {
-    return a + b;
-}
+import sum from "../sum";
 
 beforeEach(() => {});
 afterEach(() => {});
@@ -12,5 +10,3 @@ describe("Example group1", () => {
         });
     });
 });
-
-export default {}
